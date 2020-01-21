@@ -1,6 +1,6 @@
 import React from 'react';
-import {View,Text,Image,TouchableOpacity} from 'react-native';
-import MapView, { Marker,Callout } from 'react-native-maps';
+import {View,TextInput,Image,TouchableOpacity,Button} from 'react-native';
+import MapView, { Marker} from 'react-native-maps';
 import styles from './style'
 
 
@@ -44,6 +44,10 @@ class Map extends React.Component{
               <Image style={styles.markerIcon} source={require('./images/markerIcon.png')}/>
             </Marker>
           </MapView>
+
+          <View style={styles.inputContainer}>
+            <TextInput placeholder='search...' style={styles.inputStyle}></TextInput>
+          </View>
 
           <TouchableOpacity onPress={()=>this.changeMapType()} style={styles.mapTypeButton}>
             {this.state.mapType === 'standard' && <Image source={require('./images/hybrid.png')} style={styles.mapTypeImg}/>}

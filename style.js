@@ -26,6 +26,24 @@ export default StyleSheet.create({
     markerIcon:{
         width:40,
         height:40
-    }
-
+    },
+    inputContainer:{
+        alignItems:'center',
+        justifyContent:'center',
+        flexDirection:'row'
+    },
+    inputStyle:{
+        width:'90%',
+        borderWidth:1,
+        borderColor:'lightgrey',
+        backgroundColor:'#f2f2f2',
+        color:'green',
+        top:20,
+        borderRadius:5,
+        paddingLeft:15,
+        paddingRight:15,
+        paddingTop:5,
+        paddingBottom:5,
+        fontSize:15
+    },
 });
