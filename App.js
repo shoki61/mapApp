@@ -1,36 +1,56 @@
 import React from 'react';
-import {View,Text} from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import still from './style'
+import {View,Text,Image,TouchableOpacity} from 'react-native';
+import MapView, { Marker,Callout } from 'react-native-maps';
+import styles from './style'
 
 
 
 class Map extends React.Component{
   constructor(props){
     super(props);
-    this.state = {mapType:'hybrid'}
+    this.state = {mapType:'standard'}
+  }
+  changeMapType=()=>{
+    const type = this.state.mapType; 
+    if(type === 'standard'){
+      this.setState({mapType:'hybrid'})
+    }else{
+      this.setState({mapType:'standard'})
+    }
   }
   render(){
       return(
-        <View style={still.container}>
+        <View style={styles.container}>
           <MapView
-            region={{
-              latitude:27,
-              longitude:27,
-              latitudeDelta:30,
-              longitudeDelta:30
-            }}
+            style={styles.mapContainer}
             mapType={this.state.mapType}
+            showsUserLocation={true}
+            region={{
+              latitude:	41.00145,
+              longitude:39.7178,
+              latitudeDelta:41.00145,
+              longitudeDelta:39.7178,
+            }}
           >
             <Marker
+              title='Bu bir başlık'
+              description='Burasıda bir açıklama'
               coordinate={{
-                latitude:27,
-                longitude:27
+                latitude:41.00145,
+                longitude:39.7178
               }}
-              title={'Buradayım'}
-              description={'Burası bir bölge'}
-            />
+              draggable={true}
+            >
+              <Image style={styles.markerIcon} source={require('./images/markerIcon.png')}/>
+            </Marker>
           </MapView>
+
+          <TouchableOpacity onPress={()=>this.changeMapType()} style={styles.mapTypeButton}>
+            {this.state.mapType === 'standard' && <Image source={require('./images/hybrid.png')} style={styles.mapTypeImg}/>}
+            {this.state.mapType === 'hybrid' && <Image source={require('./images/satellite.png')} style={styles.mapTypeImg}/>}
+          </TouchableOpacity>
+          
+          
         </View>
     );
   }
