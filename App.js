@@ -27,10 +27,11 @@ class Map extends React.Component{
       return(
         <View style={styles.container}>
           <MapView
+            mapPadding={styles.locationButton}
             style={styles.mapContainer}
             mapType={this.state.mapType}
             region={{
-              latitude:	41.00145,
+              latitude: 41.00145,
               longitude:39.7178,
               latitudeDelta:41.00145,
               longitudeDelta:39.7178,

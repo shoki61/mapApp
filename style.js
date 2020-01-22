@@ -51,5 +51,9 @@ export default StyleSheet.create({
         position:'absolute',
         bottom:40,
         left:10
+    },
+    locationButton:{
+       top:80,
+       right:15
     }
 });
