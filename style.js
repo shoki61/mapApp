@@ -10,18 +10,15 @@ export default StyleSheet.create({
     },
     mapTypeButton:{
         position:'absolute',
-        height:64,
-        width:64,
         bottom:15,
         right:15,
-        borderRadius:100,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#e2e3d8'
     },
-    mapTypeImg:{
-        width:65,
-        height:65
+    mapTypeIcon:{
+        width:50,
+        height:50
+    },
+    mapTypeText:{
+        fontSize:10
     },
     markerIcon:{
         width:40,
@@ -46,4 +43,10 @@ export default StyleSheet.create({
         paddingBottom:5,
         fontSize:15
     },
+    sliderStyle:{
+        width:325,
+        height:20,
+        position:'absolute',
+        bottom:40,
+    }
 });

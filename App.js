@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,TextInput,Image,TouchableOpacity,Button} from 'react-native';
+import {View,TextInput,Image,TouchableOpacity,Slider,Text} from 'react-native';
 import MapView, { Marker} from 'react-native-maps';
 import styles from './style'
 
@@ -8,7 +8,7 @@ import styles from './style'
 class Map extends React.Component{
   constructor(props){
     super(props);
-    this.state = {mapType:'standard'}
+    this.state = {mapType:'standard',zoom:3}//neden zoom:3 //açıklama 41. satırda
   }
   changeMapType=()=>{
     const type = this.state.mapType; 
@@ -17,6 +17,11 @@ class Map extends React.Component{
     }else{
       this.setState({mapType:'standard'})
     }
+  }
+  changeZoomVaue(value){
+    this.setState({
+      zoom:parseInt(value)
+    })
   }
   render(){
       return(
@@ -31,6 +36,10 @@ class Map extends React.Component{
               latitudeDelta:41.00145,
               longitudeDelta:39.7178,
             }}
+            zoomEnabled={true}
+            zoomControlEnabled={true}
+            minZoomLevel={this.state.zoom}//zoom propsları 0 ile 20 arasında değer alır ama minZoomLevel'in değeri 3 olduktan sonra haritayı yaklaştırmaya başlıyor o yüzden ilk değeri 0 değil 3. state'in içindeki zoom değişkeninin değeri 3 //11. satırda
+                           
           >
             <Marker
               title='Bu bir başlık'
@@ -48,10 +57,22 @@ class Map extends React.Component{
           <View style={styles.inputContainer}>
             <TextInput placeholder='search...' style={styles.inputStyle}></TextInput>
           </View>
+         
+          <Slider
+            style={styles.sliderStyle}
+            minimumValue={3}
+            maximumValue={15}
+            minimumTrackTintColor="green"
+            maximumTrackTintColor="grey"
+            thumbTintColor='green'
+            onValueChange={this.changeZoomVaue.bind(this)}
+          />
+          
 
           <TouchableOpacity onPress={()=>this.changeMapType()} style={styles.mapTypeButton}>
-            {this.state.mapType === 'standard' && <Image source={require('./images/hybrid.png')} style={styles.mapTypeImg}/>}
-            {this.state.mapType === 'hybrid' && <Image source={require('./images/satellite.png')} style={styles.mapTypeImg}/>}
+            {this.state.mapType === 'standard' && <Image source={require('./images/hybrid.png')} style={styles.mapTypeIcon}/>}
+            {this.state.mapType === 'hybrid' && <Image source={require('./images/satellite.png')} style={styles.mapTypeIcon}/>}
+            <Text style={styles.mapTypeText}>click to change</Text>
           </TouchableOpacity>
           
           
