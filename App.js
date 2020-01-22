@@ -29,17 +29,17 @@ class Map extends React.Component{
           <MapView
             style={styles.mapContainer}
             mapType={this.state.mapType}
-            showsUserLocation={true}
             region={{
               latitude:	41.00145,
               longitude:39.7178,
               latitudeDelta:41.00145,
               longitudeDelta:39.7178,
             }}
-            zoomEnabled={true}
-            zoomControlEnabled={true}
-            minZoomLevel={this.state.zoom}//zoom propsları 0 ile 20 arasında değer alır ama minZoomLevel'in değeri 3 olduktan sonra haritayı yaklaştırmaya başlıyor o yüzden ilk değeri 0 değil 3. state'in içindeki zoom değişkeninin değeri 3 //11. satırda
-                           
+            showsMyLocationButton={true}
+            followsUserLocation={true}
+            showsUserLocation={true}
+            minZoomLevel={this.state.zoom}//zoom propsları 0 ile 20 arasında değer alır ama minZoomLevel'in değeri 3 olduktan sonra haritayı yaklaştırmaya başlıyor o yüzden ilk değeri 0 değil 3... Bu yüzden state'in içindeki zoom değişkeninin değeri 3 //11. satırda
+
           >
             <Marker
               title='Bu bir başlık'
@@ -61,7 +61,7 @@ class Map extends React.Component{
           <Slider
             style={styles.sliderStyle}
             minimumValue={3}
-            maximumValue={15}
+            maximumValue={17}
             minimumTrackTintColor="green"
             maximumTrackTintColor="grey"
             thumbTintColor='green'

@@ -12,13 +12,15 @@ export default StyleSheet.create({
         position:'absolute',
         bottom:15,
         right:15,
+        alignItems:'center'
     },
     mapTypeIcon:{
         width:50,
         height:50
     },
     mapTypeText:{
-        fontSize:10
+        fontSize:14,
+        color:'#575757',
     },
     markerIcon:{
         width:40,
@@ -44,9 +46,10 @@ export default StyleSheet.create({
         fontSize:15
     },
     sliderStyle:{
-        width:325,
+        width:300,
         height:20,
         position:'absolute',
         bottom:40,
+        left:10
     }
 });
