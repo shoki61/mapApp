@@ -45,15 +45,24 @@ export default StyleSheet.create({
         paddingBottom:5,
         fontSize:15
     },
-    sliderStyle:{
-        width:300,
-        height:20,
-        position:'absolute',
-        bottom:40,
-        left:10
-    },
     locationButton:{
        top:80,
-       right:15
+       right:15,
+       bottom:80
+    },
+    iconStyle:{
+        width:45,
+        height:45
+    },
+    carContainer:{
+        position:'absolute',
+        bottom:20,
+        left:20
+    },
+    fullMapContainer:{
+        position:'absolute',
+        bottom:70,
+        left:20
     }
+
 });

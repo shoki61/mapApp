@@ -1,6 +1,6 @@
 import React from 'react';
-import {View,TextInput,Image,TouchableOpacity,Slider,Text} from 'react-native';
-import MapView, { Marker} from 'react-native-maps';
+import {View,TextInput,Image,TouchableOpacity,Text,PermissionsAndroid} from 'react-native';
+import MapView, { Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styles from './style'
 
 
@@ -8,7 +8,16 @@ import styles from './style'
 class Map extends React.Component{
   constructor(props){
     super(props);
-    this.state = {mapType:'standard',zoom:3}//neden zoom:3 //açıklama 41. satırda
+    this.state = {
+      mapType:'standard',
+      trafficInfo: false,
+      region: {
+        latitude: 56,
+        longitude: 56,
+        latitudeDelta:56,
+        longitudeDelta: 56,
+      }
+    }
   }
   changeMapType=()=>{
     const type = this.state.mapType; 
@@ -18,11 +27,10 @@ class Map extends React.Component{
       this.setState({mapType:'standard'})
     }
   }
-  changeZoomVaue(value){
-    this.setState({
-      zoom:parseInt(value)
-    })
+  changeTrafficInfo=()=>{
+    this.setState({ trafficInfo : !this.state.trafficInfo })
   }
+ 
   render(){
       return(
         <View style={styles.container}>
@@ -30,44 +38,32 @@ class Map extends React.Component{
             mapPadding={styles.locationButton}
             style={styles.mapContainer}
             mapType={this.state.mapType}
-            region={{
-              latitude: 41.00145,
-              longitude:39.7178,
-              latitudeDelta:41.00145,
-              longitudeDelta:39.7178,
-            }}
-            showsMyLocationButton={true}
-            followsUserLocation={true}
-            showsUserLocation={true}
-            minZoomLevel={this.state.zoom}//zoom propsları 0 ile 20 arasında değer alır ama minZoomLevel'in değeri 3 olduktan sonra haritayı yaklaştırmaya başlıyor o yüzden ilk değeri 0 değil 3... Bu yüzden state'in içindeki zoom değişkeninin değeri 3 //11. satırda
-
+            showsMyLocationButton
+            followsUserLocation
+            showsUserLocation
+            showsTraffic={this.state.trafficInfo}
+            zoomControlEnabled
+            provider={PROVIDER_GOOGLE}
           >
             <Marker
-              title='Bu bir başlık'
-              description='Burasıda bir açıklama'
-              coordinate={{
-                latitude:41.00145,
-                longitude:39.7178
-              }}
-              draggable={true}
-            >
-              <Image style={styles.markerIcon} source={require('./images/markerIcon.png')}/>
-            </Marker>
+              coordinate={ this.state.region }
+              draggable
+            />
           </MapView>
 
           <View style={styles.inputContainer}>
             <TextInput placeholder='search...' style={styles.inputStyle}></TextInput>
           </View>
+
+          <View style={styles.carContainer}>
+            <TouchableOpacity onPress={()=>this.changeTrafficInfo()}>
+              {this.state.trafficInfo === true ? (<Image style={styles.iconStyle} source={require('./images/carActiveIcon.png')}/>):
+                (<Image style={styles.iconStyle} source={require('./images/carIcon.png')}/>)
+              }
+            </TouchableOpacity>
+          </View>
          
-          <Slider
-            style={styles.sliderStyle}
-            minimumValue={3}
-            maximumValue={17}
-            minimumTrackTintColor="green"
-            maximumTrackTintColor="grey"
-            thumbTintColor='green'
-            onValueChange={this.changeZoomVaue.bind(this)}
-          />
+          
           
 
           <TouchableOpacity onPress={()=>this.changeMapType()} style={styles.mapTypeButton}>
