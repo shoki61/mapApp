@@ -53,7 +53,7 @@ class Map extends React.Component{
             <MapViewDirections
               origin={this.state.region}
               destination={this.state.region1}
-              apikey={'AIzaSyCs_G0OGN30lNt-E_K6BzVjEqznCGZx8bM'}
+              apikey={'APIKEY'}
               strokeWidth={4}
 			  strokeColor={'red'}
 		      mode={this.state.mode}
