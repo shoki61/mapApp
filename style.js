@@ -63,6 +63,11 @@ export default StyleSheet.create({
         position:'absolute',
         bottom:70,
         left:20
+    },
+    modeContainer:{
+        position:'absolute',
+        top:90,
+        left:15
     }
 
 });
